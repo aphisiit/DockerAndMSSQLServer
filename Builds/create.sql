@@ -26,18 +26,44 @@ CREATE LOGIN adminewf WITH
 	DEFAULT_DATABASE = GWF
 GO
 
+USE GWF
 CREATE USER adminewf FOR LOGIN adminewf WITH DEFAULT_SCHEMA = GWF;
 GO
 
+USE GWF
+EXEC sp_addsrvrolemember 'adminewf','sysadmin'
+GO
 
-GRANT CREATE VIEW TO adminewf;  
+USE GWF
+EXEC sp_addrolemember 'adminewf','db_owner'
+Go
+
+USE GWF
+EXEC sp_addrolemember 'adminewf','public'
+Go
+
+USE GWF
+GRANT CREATE VIEW TO adminewf;
 GO 
 
+USE GWF
+GRANT ALTER VIEW TO adminewf;
+GO 
+
+USE GWF
 GRANT CONTROL TO adminewf 
 GO
 
--- EXEC sp_addrolemember 'db_owner', 'adminewf'
--- Go
+USE GWF
+GRANT CREATE TABLE TO adminewf
+GO
 
--- EXEC sp_addrolemember 'public', 'adminewf'
--- Go
+USE GWF
+GRANT DROP TABLE TO adminewf
+GO
+
+ALTER AUTHORIZATION ON DATABASE::GWF TO adminwef
+GO
+
+
+
