@@ -1,0 +1,11 @@
+# FROM microsoft/mssql-server-linux:2017-latest
+
+# RUN powershell -Command mkdir C:\\SQLServer
+
+# COPY GWF.mdf C:\\SQLServer
+# COPY GWF_log.ldf C:\\SQLServer
+
+# ENV SA_PASSWORD=P@ssw0rd
+# ENV ACCEPT_EULA=Y
+
+# ENV attach_dbs="[{'dbName':'GWF','dbFiles':['C:\\SQLServer\\GWF.mdf','C:\\SQLServer\\GWF_log.ldf']}]"
