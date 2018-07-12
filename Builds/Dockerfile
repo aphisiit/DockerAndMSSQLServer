@@ -1,11 +1,12 @@
-# FROM microsoft/mssql-server-windows
+FROM microsoft/mssql-server-linux:2017-latest
 
-# RUN powershell -Command (mkdir C:\\SQLServer)
+RUN mkdir /var/opt/sqlserver
 
-# COPY DatabaseA.mdf C:\\SQLServer
-# COPY DatabaseA_log.ldf C:\\SQLServer
+COPY create.sql /var/opt/sqlserver
 
-# ENV sa_password=Bb5604937
-# ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=P@ssw0rd
+ENV ACCEPT_EULA=Y
 
-# ENV attach_dbs="[{'dbName':'DatabaseA','dbFiles':['C:\\SQLServer\\DatabaseA.mdf','C:\\SQLServer\\DatabaseA_log.ldf']}]"
+HEALTHCHECK --interval=10s  \
+	CMD /opt/mssql-tools/bin/sqlcmd -S . -U sa -P P@ssw0rd \
+		-i /var/opt/sqlserver/create.sql
